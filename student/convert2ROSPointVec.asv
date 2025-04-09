@@ -40,6 +40,6 @@ function traj_goal = convert2ROSPointVec(mat_joint_traj, robot_joint_names, traj
     
     
     % TODO: Copy points to traj_goal.Trajectory.Points
-    traj_goal.Trajectory.Points = r.point;
+    
 
 end

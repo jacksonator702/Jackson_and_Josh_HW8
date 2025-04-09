@@ -28,14 +28,14 @@ function [res,state] = doGrip(type,optns,doGripValue )
     end
 
     %% TODO: Pack gripper information intro ROS message
-    
+    grip_msg = packGripGoal(gripPos,grip_msg);
 
     %% Pending: Check if fingers already at goal
     % Get current finger position
     % Compare with with goal
     % If so, do not call action
-    if gripPos == grip_goal
-    else
+    %if gripPos == grip_goal
+    %else
     
     %% Send action goal
     disp('Sending grip goal...');
@@ -48,4 +48,5 @@ function [res,state] = doGrip(type,optns,doGripValue )
         disp('No server..? Trying again...');
         [res,state,status] = sendGoalAndWait(r.grip_action_client,grip_goal);
     end    
+    %end
 end

@@ -8,7 +8,8 @@ function resetWorld(optns)
     disp('Resetting the world...');
     
     % TODO: 01 Get robot handle
-res_client = rossvcclient('/gazebo/reset_world','DataFormat','struct');
+r = optns{'rHandle'};
+    res_client = rossvcclient('/gazebo/reset_world','DataFormat','struct');
     
     % TODO: 02 Create Empty Simulation message
 res_req = rosmessage(res_client);
