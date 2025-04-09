@@ -87,7 +87,7 @@ if strcmp(type,'gazebo')
         [mat_R_T_G, mat_R_T_M] = get_robot_object_pose_wrt_base_link(model_name,get_robot_gripper_pose_flag,optns);
        
         % 05.2 Pick Model
-        strategy = 'topdown';               % Assign strategy: topdown, direct
+        strategy = 'topdown';                  % Assign strategy: topdown, direct
         ret = pick(strategy, mat_R_T_M,optns); % Can have optional starting opse for ctraj like: ret = pick(strategy, mat_R_T_M,mat_R_T_G);
         
         % 05.3 Place

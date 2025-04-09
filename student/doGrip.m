@@ -3,7 +3,7 @@ function [res,state] = doGrip(type,optns,doGripValue )
 % Tell gripper to either pick or place via the ros gripper action client
 %
 % Input: type (string) - 'pick' or 'place'
-% Output: actoin result and state
+% Output: action result and state
 %--------------------------------------------------------------------------
 
     %% Init
@@ -13,8 +13,8 @@ function [res,state] = doGrip(type,optns,doGripValue )
     grip_msg = rosmessage(r.grip_action_client);
 
     %% Testing if setting FeedbackFcn to 0 minimizes the loss connection
-    r.grip_action_client.FeedbackFcn = [];
-    r.grip_action_client.ResultFcn = [];
+    % r.grip_action_client.FeedbackFcn = [];
+    % r.grip_action_client.ResultFcn = [];
 
     %% Set Grip Pos by default to pick / close gripper
     if nargin==3
@@ -28,7 +28,7 @@ function [res,state] = doGrip(type,optns,doGripValue )
     end
 
     %% TODO: Pack gripper information intro ROS message
-    grip_msg = packGripGoal(gripPos,grip_msg);
+    grip_msg = packGripGoal_ros(gripPos,grip_msg);
 
     %% Pending: Check if fingers already at goal
     % Get current finger position
@@ -42,11 +42,11 @@ function [res,state] = doGrip(type,optns,doGripValue )
 
     try waitForServer(r.grip_action_client,2)
         disp('Connected to Grip server. Moving fingers...')
-        [res,state,status] = sendGoalAndWait(r.grip_action_client,grip_goal);
+        [res,state,status] = sendGoalAndWait(r.grip_action_client,grip_msg,2);
     catch
         % Re-attempt
         disp('No server..? Trying again...');
-        [res,state,status] = sendGoalAndWait(r.grip_action_client,grip_goal);
+        [res,state,status] = sendGoalAndWait(r.grip_action_client,grip_msg,2);
     end    
     %end
 end

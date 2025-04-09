@@ -21,7 +21,7 @@ function gripGoal=packGripGoal(pos,gripGoal)
     % A populated gripGoal message
     %----------------------------------------------------------------------
     
-    r =  rosClassHandle;% optns{'rHandle'}; %
+    r =  optns{'rHandle'}; %
 
     % 1. Set Point, name and Duration
     jointWaypoints = pos;                % Set position of way points
